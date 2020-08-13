@@ -6,13 +6,18 @@ OMPFLAGS = -fopenmp
 #DEPS = 
 
 TARGETS=single_isir_waitall_mbw_mr
+TARGETS+=single_issir_wait_toy
+TARGETS+=single_issir_waitall_mbw_mr
 TARGETS+=single_isir_testall_mbw_mr
+TARGETS+=single_issir_testall_mbw_mr
 TARGETS+=single_isiprober_testall_mbw_mr
 TARGETS+=single_isir_test_ping
 TARGETS+=funneled_isir_waitall_comm_world_mbw_mr
 TARGETS+=serialized_isir_waitall_comm_world_mbw_mr
 TARGETS+=multiple_isir_waitall_mbw_mr
+TARGETS+=multiple_issir_waitall_mbw_mr
 TARGETS+=multiple_isir_testall_mbw_mr
+TARGETS+=multiple_issir_testall_mbw_mr
 TARGETS+=multiple_isiprober_testall_mbw_mr
 TARGETS+=multiple_isir_testall_mr_toy
 TARGETS+=multiple_isir_waitall_comm_world_mbw_mr
@@ -20,10 +25,19 @@ TARGETS+=multiple_isir_test_ping
 TARGETS+=multiple_multi_sender_single_receiver
 TARGETS+=multiple_single_sender_multi_receiver_mbw_mr
 
+single_issir_wait_toy: single_issir_wait_toy.c
+	$(CC) $(CFLAGS) $(MACROS) $^ -o $@
+
 single_isir_waitall_mbw_mr: single_isir_waitall_mbw_mr.c
 	$(CC) $(CFLAGS) $(MACROS) $^ -o $@
 
+single_issir_waitall_mbw_mr: single_issir_waitall_mbw_mr.c
+	$(CC) $(CFLAGS) $(MACROS) $^ -o $@
+
 single_isir_testall_mbw_mr: single_isir_testall_mbw_mr.c
+	$(CC) $(CFLAGS) $(MACROS) $^ -o $@
+
+single_issir_testall_mbw_mr: single_issir_testall_mbw_mr.c
 	$(CC) $(CFLAGS) $(MACROS) $^ -o $@
 
 single_isiprober_testall_mbw_mr: single_isiprober_testall_mbw_mr.c
@@ -41,7 +55,13 @@ serialized_isir_waitall_comm_world_mbw_mr: serialized_isir_waitall_comm_world_mb
 multiple_isir_waitall_mbw_mr: multiple_isir_waitall_mbw_mr.c
 	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
 
+multiple_issir_waitall_mbw_mr: multiple_issir_waitall_mbw_mr.c
+	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
+
 multiple_isir_testall_mbw_mr: multiple_isir_testall_mbw_mr.c
+	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
+
+multiple_issir_testall_mbw_mr: multiple_issir_testall_mbw_mr.c
 	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
 
 multiple_isiprober_testall_mbw_mr: multiple_isiprober_testall_mbw_mr.c
