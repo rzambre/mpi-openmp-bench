@@ -1,4 +1,4 @@
-CC = icc
+CC = gcc
 CFLAGS = -Wall -O3 -g3 -lmpi
 MACROS =# -DERRCHK
 OMPFLAGS = -fopenmp
@@ -15,6 +15,7 @@ TARGETS+=single_isir_test_ping
 TARGETS+=funneled_isir_waitall_comm_world_mbw_mr
 TARGETS+=serialized_isir_waitall_comm_world_mbw_mr
 TARGETS+=multiple_isir_waitall_mbw_mr
+TARGETS+=multiple_tag_isir_waitall_mbw_mr
 TARGETS+=multiple_issir_waitall_mbw_mr
 TARGETS+=multiple_isir_testall_mbw_mr
 TARGETS+=multiple_issir_testall_mbw_mr
@@ -53,6 +54,9 @@ serialized_isir_waitall_comm_world_mbw_mr: serialized_isir_waitall_comm_world_mb
 	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
 
 multiple_isir_waitall_mbw_mr: multiple_isir_waitall_mbw_mr.c
+	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
+
+multiple_tag_isir_waitall_mbw_mr: multiple_tag_isir_waitall_mbw_mr.c
 	$(CC) $(OMPFLAGS) $(CFLAGS) $(MACROS) $^ -o $@
 
 multiple_issir_waitall_mbw_mr: multiple_issir_waitall_mbw_mr.c
