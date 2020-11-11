@@ -130,21 +130,14 @@ int run_bench(int rank, int size)
 #pragma omp barrier
             
             /* Benchmark */
-#pragma omp master
-            {
-                MPI_Win_free(&window);
-            }
-#pragma omp barrier
+
         }
-    }
-    
-    if (rank % 2 == 0) {
-        MPI_Win_unlock_all(window);
-        MPI_Win_free(&window);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
     
+    MPI_Win_unlock_all(window);
+
     if (rank % 2 == 0) {
         int thread_i;
         msg_rate = 0;
@@ -167,6 +160,7 @@ int run_bench(int rank, int size)
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
+    MPI_Win_free(&window);
     
     free(contig_buf);
 

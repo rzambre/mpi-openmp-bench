@@ -150,11 +150,11 @@ int run_bench(int rank, int size)
         }
     }
 
-    for (i = 0; i < num_threads; i++)
-        MPI_Win_unlock_all(window[i]);
-    
     MPI_Barrier(MPI_COMM_WORLD);
     
+    for (i = 0; i < num_threads; i++)
+        MPI_Win_unlock_all(window[i]);
+     
     if (rank % 2 == 0) {
         int thread_i;
         msg_rate = 0;
